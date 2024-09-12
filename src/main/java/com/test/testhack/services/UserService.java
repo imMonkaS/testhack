@@ -61,4 +61,8 @@ public class UserService {
         return this.userRepo.findAll();
     }
 
+    public void deleteById(Long user_id){
+        this.userRepo.deleteById(user_id);
+    }
+
 }

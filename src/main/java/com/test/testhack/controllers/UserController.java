@@ -19,11 +19,11 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/add")
-    public String addUser(@RequestBody UserModel user){
-        userService.addUser(user);
-        return "Success";
-    }
+//    @PostMapping("/add")
+//    public String addUser(@RequestBody UserModel user){
+//        userService.addUser(user);
+//        return "Success";
+//    }
 
     @GetMapping("/{id}")
     public UserModel getUserById(@PathVariable Long id){
@@ -38,6 +38,11 @@ public class UserController {
     @GetMapping("/getAll")
     public List<UserModel> getAllUsers(){
         return userService.getAll();
+    }
+
+    @DeleteMapping("/{id}/delete")
+    public void deleteUser(@PathVariable Long id){
+        userService.deleteById(id);
     }
 
 }
