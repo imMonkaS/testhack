@@ -1,5 +1,6 @@
 package com.test.testhack.controllers;
 
+import com.test.testhack.models.OrgModel;
 import com.test.testhack.models.UserModel;
 import com.test.testhack.schemas.user.GetUsersSchema;
 import com.test.testhack.services.UserService;
@@ -19,12 +20,6 @@ public class UserController {
         this.userService = userService;
     }
 
-//    @PostMapping("/add")
-//    public String addUser(@RequestBody UserModel user){
-//        userService.addUser(user);
-//        return "Success";
-//    }
-
     @GetMapping("/{id}")
     public UserModel getUserById(@PathVariable Long id){
         return userService.getUserById(id);
@@ -43,6 +38,11 @@ public class UserController {
     @DeleteMapping("/{id}/delete")
     public void deleteUser(@PathVariable Long id){
         userService.deleteById(id);
+    }
+
+    @GetMapping("/{id}/orgs_own")
+    public List<OrgModel> getAllOwnedOrgs(@PathVariable Long id){
+        return userService.getUserOrgs(id);
     }
 
 }

@@ -7,13 +7,14 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Data
@@ -49,6 +50,20 @@ public class UserModel implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     private UserRole role = UserRole.USER;
+
+    @CreationTimestamp
+    @Column(name = "created_date", updatable = false)
+    private Date createdDate;
+
+    @UpdateTimestamp
+    @Column(name = "updated_date")
+    private Date updatedDate;
+
+    @OneToMany(mappedBy = "owner")
+    public Set<OrgModel> organizations = new HashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    public Set<OrgMembersModel> member_of = new HashSet<>();
 
     public UserModel(){
 

@@ -1,7 +1,9 @@
 package com.test.testhack.services;
 
 import com.test.testhack.exceptions.NotFoundException;
+import com.test.testhack.models.OrgModel;
 import com.test.testhack.models.UserModel;
+import com.test.testhack.repositories.OrgRepo;
 import com.test.testhack.repositories.UserRepo;
 import com.test.testhack.schemas.user.GetUsersSchema;
 import io.micrometer.common.util.StringUtils;
@@ -17,10 +19,12 @@ import java.util.Optional;
 @Service
 public class UserService {
     private final UserRepo userRepo;
+    private final OrgRepo orgRepo;
 
     @Autowired
-    public UserService(UserRepo userRepository) {
+    public UserService(UserRepo userRepository, OrgRepo orgRepository) {
         this.userRepo = userRepository;
+        this.orgRepo = orgRepository;
     }
 
     public void addUser(UserModel user){
@@ -63,6 +67,10 @@ public class UserService {
 
     public void deleteById(Long user_id){
         this.userRepo.deleteById(user_id);
+    }
+
+    public List<OrgModel> getUserOrgs(Long user_id){
+        return this.orgRepo.findAllByUserId(user_id);
     }
 
 }
