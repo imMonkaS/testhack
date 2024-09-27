@@ -8,6 +8,8 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
@@ -60,9 +62,11 @@ public class UserModel implements UserDetails {
     private Date updatedDate;
 
     @OneToMany(mappedBy = "owner")
+    @Fetch(FetchMode.JOIN)
     public Set<OrgModel> organizations = new HashSet<>();
 
     @OneToMany(mappedBy = "user")
+    @Fetch(FetchMode.JOIN)
     public Set<OrgMembersModel> member_of = new HashSet<>();
 
     public UserModel(){

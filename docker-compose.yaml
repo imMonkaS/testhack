@@ -12,3 +12,22 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_USER: user
       POSTGRES_DB: postgres
+
+  backend:
+    environment:
+      - POSTGRES_PORT=5432
+      - POSTGRES_HOST=postgres
+    build:
+      dockerfile: deploy/docker/api.Dockerfile
+    container_name: testhack-app
+    ports:
+    - 6701:7071
+    depends_on:
+      - postgres
+
+  frontend:
+    container_name: my-react-app
+    build:
+      dockerfile: src/main/frontend/deploy/docker/react-app.Dockerfile
+    ports:
+      - 6702:6702
