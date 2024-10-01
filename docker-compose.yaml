@@ -21,7 +21,7 @@ services:
       dockerfile: deploy/docker/api.Dockerfile
     container_name: testhack-app
     ports:
-    - 6701:7071
+    - 6701:6701
     depends_on:
       - postgres
 

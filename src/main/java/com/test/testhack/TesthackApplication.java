@@ -1,5 +1,7 @@
 package com.test.testhack;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
 import jakarta.persistence.Entity;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -12,6 +14,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @Configuration
 @AutoConfiguration
+@OpenAPIDefinition(info = @Info(title = "My API", version = "1.0", description = "My API Description"))
 public class TesthackApplication {
 
 	public static void main(String[] args) {
